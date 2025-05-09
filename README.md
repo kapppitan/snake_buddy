@@ -18,7 +18,7 @@
 ## 📂 Getting Started
 
 1. Install Flutter dependencies
-```bash flutter pub get```
+```flutter pub get```
 
 2. Run Flutter application through main.dart
-```bash flutter run```
+```flutter run```
