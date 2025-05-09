@@ -1,14 +1,18 @@
 import 'dart:convert';
 import 'dart:isolate';
-// import 'dart:typed_data';
+import 'api_keys.dart'; 
+// If api_keys.dart is missing then create one
+// filename: 
+//    api_keys.dart
+// content:
+//    const String googleApiKey = "your_key_here";
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:image/image.dart' as img;
 
 class GeminiHelper {
-  // Replace with your actual API key
-  static const String _apiKey = "AIzaSyDwnVkCEvCL9VtPxy84tQ3QrU3QhiUH3oM";
   static const String _modelName = 'gemini-1.5-pro';
 
   Future<Map<String, dynamic>> analyzeSnakeImage(img.Image image) async {
@@ -16,7 +20,7 @@ class GeminiHelper {
       // Initialize the Gemini model
       final model = GenerativeModel(
         model: _modelName,
-        apiKey: _apiKey,
+        apiKey: googleApiKey, // Gets API key inside api_keys.dart
       );
 
       // Convert the image to bytes
