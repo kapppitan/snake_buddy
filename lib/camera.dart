@@ -21,6 +21,7 @@ class CameraPageState extends State<CameraPage> {
   bool disableZoom = true;
   Uint8List? capturedImageBytes;
 
+  // Initialize the camera controller, its size, and the algorithm
   @override
   void initState() {
     super.initState();
@@ -52,6 +53,7 @@ class CameraPageState extends State<CameraPage> {
     super.dispose();
   }
 
+  // Function to capture and pass the image to the algorithm
   Future<void> captureAndProcessImage(BuildContext context) async {
     setState(() => isLoading = true);
 
@@ -68,25 +70,28 @@ class CameraPageState extends State<CameraPage> {
         return;
       }
 
-      // Resize image for API processing
+      // Resize image for processing
       final img.Image resizedImage = img.copyResize(decodedImage, width: 512, height: 512);
 
-      // Process with Gemini API
+      // Process with the algorithm
       final result = await _geminiHelper.analyzeSnakeImage(resizedImage);
 
       setState(() => isLoading = false);
 
       if (mounted) {
+        // Returns an error if the scanning failed
         if (result.containsKey('error') && result['error'] == true) {
           _showErrorDialog(result['message']);
           return;
         }
 
+        // Return random if there were no snakes identified
         if (result.containsKey('name') && result['name'] == 'Random') {
           _showErrorDialog('There were no identifiable snakes in the image.');
           return;
         }
 
+       // Navigate to details page with the result
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -103,6 +108,7 @@ class CameraPageState extends State<CameraPage> {
     }
   }
 
+  // Show error dialog
   void _showErrorDialog(String message) {
     showDialog(
       context: context,
@@ -121,6 +127,7 @@ class CameraPageState extends State<CameraPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Camera page layout follows
     return Stack(
       children: [
         Positioned.fill(

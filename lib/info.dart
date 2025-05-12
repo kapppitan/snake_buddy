@@ -40,6 +40,7 @@ class InfoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Info page layout follows
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(

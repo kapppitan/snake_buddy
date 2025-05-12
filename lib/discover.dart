@@ -65,6 +65,7 @@ class DiscoverPageState extends State<DiscoverPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Discover page layout follows
     return Stack(
       children: [
         const Positioned(

@@ -16,7 +16,6 @@
 
 import 'package:camera/camera.dart';
 import 'package:image/image.dart' as image_lib;
-// import 'package:image/image.dart' as img;
 
 // Define ImageFormat enum
 enum ImageFormat { yuv420, bgra8888 }
