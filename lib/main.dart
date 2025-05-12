@@ -14,14 +14,15 @@ import 'package:snake_buddy/helper/gemini_helper.dart';
 List<CameraDescription> camera = [];
 
 Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  WakelockPlus.enable();
+  WidgetsFlutterBinding.ensureInitialized(); // Ensures that the binding is initialized before using any platform channels
+  WakelockPlus.enable(); // Prevents the screen from sleeping
 
-  camera = await availableCameras();
+  camera = await availableCameras(); // Initializes cameras
 
-  runApp(const MainApp());
+  runApp(const MainApp()); // Starts the app
 }
 
+// The main widget of the application
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
 
@@ -65,16 +66,17 @@ class HomePageState extends State<HomePage> with SingleTickerProviderStateMixin 
       final imageBytes = await image.readAsBytes();
       final img.Image? decodedImage = img.decodeImage(Uint8List.fromList(imageBytes));
 
+      // If failed to decode image, show error dialog
       if (decodedImage == null) {
         setState(() => isLoading = false);
         _showErrorDialog('Failed to decode image');
         return;
       }
 
-      // Resize image for API processing
+      // Resize image for processing
       final img.Image resizedImage = img.copyResize(decodedImage, width: 512, height: 512);
 
-      // Process with Gemini API
+      // Process with the algorithm
       final result = await _geminiHelper.analyzeSnakeImage(resizedImage);
 
       setState(() => isLoading = false);
@@ -121,6 +123,7 @@ class HomePageState extends State<HomePage> with SingleTickerProviderStateMixin 
   // Main Widget 
   @override
   Widget build(BuildContext context) {
+    // Main page layout follows
     return Stack(
       children: [
         Positioned.fill(

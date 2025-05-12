@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:snake_buddy/info.dart';
 
 class DetailsPage extends StatefulWidget {
-  const DetailsPage({
+  const DetailsPage({ // The constructor used for obtaining the snake data to be displayed
     super.key,
     required this.result,
     this.showLoading = true,
@@ -29,6 +29,7 @@ class _DetailsPageState extends State<DetailsPage> {
     _processData();
   }
 
+  // Loading screen simulation
   Future<void> _processData() async {
     if (widget.showLoading) {
       await Future.delayed(const Duration(seconds: 1));
@@ -42,6 +43,7 @@ class _DetailsPageState extends State<DetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Details page layout follows
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
