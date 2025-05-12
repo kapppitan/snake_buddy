@@ -64,7 +64,3 @@ To run this project, ensure you have the following installed on your system:
    ```bash
    flutter doctor
    ```
-
----
-
-Feel free to customize this further if needed!
